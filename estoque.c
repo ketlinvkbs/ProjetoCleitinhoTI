@@ -39,7 +39,7 @@ void cadastrar_peca(void) {
     estoque[total_pecas] = nova_peca;
     total_pecas++;
 
-    printf("\nPeça cadastrada com sucesso! Estoque inicial: %d\n", nova_peca.nome, nova_peca.quantidade);
+    printf("\nPeça cadastrada com sucesso! Estoque inicial: %s, %d\n", nova_peca.nome, nova_peca.quantidade);
 }
 
 // Lista todas as peças no estoque
@@ -82,7 +82,7 @@ void dar_baixa_peca(void) {
         return;
     }
 
-    printf("Peça selecionada: [32m%s[0m (Estoque atual: %d)\n", peca->nome, peca->quantidade);
+    printf("Peça selecionada: %s (Estoque atual: %d)\n", peca->nome, peca->quantidade);
     printf("Quantidade a ser baixada: ");
     baixa = ler_inteiro();
 
@@ -97,7 +97,7 @@ void dar_baixa_peca(void) {
     }
 
     peca->quantidade -= baixa;
-    printf("\nBaixa realizada com sucesso.",
+    printf("\nBaixa de %d unidades da peça '%s' realizada com sucesso. Novo estoque: %d",
            baixa, peca->nome, peca->quantidade);
 }
 

@@ -44,7 +44,7 @@ void cadastrar_cliente(void) {
     clientes[total_clientes] = novo_cliente;
     total_clientes++;
 
-    printf("\nCliente cadastrado com sucesso!\n", novo_cliente.nome);
+    printf("\nCliente cadastrado com sucesso!\n");
 }
 
 // Busca um cliente pelo CPF

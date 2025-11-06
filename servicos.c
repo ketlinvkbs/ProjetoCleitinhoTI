@@ -51,7 +51,7 @@ void cadastrar_servico(void) {
 
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
-    sprintf(novo_servico.data_entrada, "%02d/%02d/%d", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900);
+    snprintf(novo_servico.data_entrada, MAX_DATA, "%02d/%02d/%d", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900);
 
     novo_servico.urgente = 0; // Não urgente por padrão
     novo_servico.ativo = 1;
@@ -59,7 +59,7 @@ void cadastrar_servico(void) {
     servicos[total_servicos] = novo_servico;
     total_servicos++;
 
-    printf("\nServiço registrado com sucesso! (ID: [33m%d[0m) Status inicial: [33m%s[0m\n",
+    printf("\nServiço registrado com sucesso! (ID: %d Status inicial: %s\n",
            novo_servico.id, novo_servico.status);
 }
 
@@ -95,12 +95,12 @@ void atualizar_status_servico(void) {
         case 3: strcpy(novo_status, "Pronto para retirada"); break;
         case 4: strcpy(novo_status, "Entregue"); break;
         default:
-            printf("\n[31mOpção de status inválida. Cancelando atualização.[0m\n");
+            printf("\nOpção de status inválida. Cancelando atualização.\n");
             return;
     }
 
     strcpy(servico->status, novo_status);
-    printf("\nStatus do Serviço ID [33m%d[0m atualizado para: %s\n", servico->id, servico->status);
+    printf("\nStatus do Serviço ID  atualizado para: %s\n", servico->id, servico->status);
 }
 
 void listar_servicos(void) {
@@ -128,7 +128,7 @@ void listar_servicos(void) {
 void menu_servicos(void) {
     int opcao;
     do {
-        printf("\n[34m--- MÓDULO DE SERVIÇOS ---[0m\n");
+        printf("\n--- MÓDULO DE SERVIÇOS ---\n");
         printf("1. Registrar Novo Serviço\n");
         printf("2. Atualizar Status de Serviço\n");
         printf("3. Listar Todos os Serviços\n");

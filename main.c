@@ -16,11 +16,11 @@ void menu_principal(void) {
     int opcao;
     do {
         printf("\n--- MENU PRINCIPAL ---\n");
-        printf("1. Módulo de Clientes\n");
-        printf("2. Módulo de Serviços\n");
-        printf("3. Módulo de Estoque de Peças\n");
-        printf("4. Módulo de Relatórios\n");
-        printf("0. Sair e Salvar\n");
+        printf("1. Clientes\n");
+        printf("2. Serviços\n");
+        printf("3. Estoque de Peças\n");
+        printf("4. Relatórios\n");
+        printf("0. Sair \n");
         printf("Escolha uma opção: ");
         opcao = ler_inteiro();
 
