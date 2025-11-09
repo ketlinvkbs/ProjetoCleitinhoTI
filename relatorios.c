@@ -56,7 +56,40 @@ void relatorio_pecas_estoque_baixo(void) {
 
 void relatorio_financeiro_mensal(void) {
     printf("\n--- RELATÓRIO FINANCEIRO MENSAL ---\n");
-    printf("Funcionalidade em desenvolvimento.\n");
+    
+    printf("Digite o mês que deseja consultar (1 a 12): ");
+    int mes_busca = ler_inteiro();
+
+    if (mes_busca < 1 || mes_busca > 12) {
+        printf("\nMês inválido. Por favor, digite um número entre 1 e 12.\n");
+        return;
+    }
+
+    float total_faturado = 0.0;
+    int encontrados = 0;
+
+    for (int i = 0; i < total_servicos; i++) {
+        
+        if (servicos[i].ativo && strcmp(servicos[i].status, "Entregue") == 0) {
+            
+            int dia, mes_servico, ano;
+            
+            int result = sscanf(servicos[i].data_entrada, "%d/%d/%d", &dia, &mes_servico, &ano);
+            
+            if (result == 3 && mes_servico == mes_busca) {
+              
+                total_faturado += servicos[i].valor;
+                encontrados++;
+            }
+        }
+    }
+
+    if (encontrados > 0) {
+        printf("\nTotal faturado no mês %d: R$ %.2f\n", mes_busca, total_faturado);
+        printf("(Baseado em %d serviço(s) marcado(s) como 'Entregue'.)\n", encontrados);
+    } else {
+        printf("\nNenhum serviço 'Entregue' foi encontrado para o mês %d.\n", mes_busca);
+    }
 }
 
 void menu_relatorios(void) {
@@ -65,7 +98,8 @@ void menu_relatorios(void) {
         printf("\n--- MÓDULO DE RELATÓRIOS ---\n");
         printf("1. Serviços Prontos para Retirada\n");
         printf("2. Peças com Estoque Baixo\n");
-        printf("3. Relatório Financeiro Mensal (Em Breve)\n");
+
+        printf("3. Relatório Financeiro Mensal\n");
         printf("0. Voltar ao Menu Principal\n");
         printf("Escolha uma opção: ");
         opcao = ler_inteiro();
@@ -73,7 +107,7 @@ void menu_relatorios(void) {
         switch (opcao) {
             case 1: relatorio_prontos_para_retirada(); break;
             case 2: relatorio_pecas_estoque_baixo(); break;
-            case 3: relatorio_financeiro_mensal(); break;
+            case 3: relatorio_financeiro_mensal(); break; 
             case 0: break;
             default: printf("\nOpção inválida. Tente novamente.\n");
         }
